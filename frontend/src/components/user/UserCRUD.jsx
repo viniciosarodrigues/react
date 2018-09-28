@@ -8,13 +8,11 @@ const headerProps = {
 }
 
 export default class UserCRUD extends Component {
-    constructor() {
-        super(props)
-    }
-
     render() {
-        <Main {...headerProps}>
-            
-        </Main>
+        return (
+            <Main {...headerProps}>
+                Cadastro de Usuários
+            </Main>
+        )
     }
 }
