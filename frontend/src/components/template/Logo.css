@@ -1,0 +1,13 @@
+aside.logo {
+    background-color:var(--bg-agfa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow) ;
+}
+
+aside a img {
+    padding: 0px 15px;
+    width: 100%;
+    height: var(--logo-height);
+}
