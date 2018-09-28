@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios  from 'axios'
 import Main from '../template/Main'
 
+import {notify} from 'react-notify-toast';
+
 const headerProps = {
     icon: 'users',
     title: 'Usuários',
@@ -44,10 +46,60 @@ export default class UserCRUD extends Component {
         this.setState({ user })
     }
 
-    getUpdatedList(user) {
+    getUpdatedList(user, add = true) {
         const list = this.state.list.filter(u => u.id !== user.id)
-        list.unshift(user)
+        if(add) list.unshift(user)
         return list
+    }
+
+    load(user) {
+        this.setState({user})
+    }
+
+    remove(user) {
+        axios.delete(`${baseUrl}/${user.id}`).then(resp => {
+            const list = this.getUpdatedList(user, false)
+            this.setState({list})
+            notify.show('Usuário deletado com sucesso!')
+        })
+    }
+
+    renderTable() {
+        return (
+            <table className="table mt-4">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.renderRows()}
+                </tbody>
+            </table>
+        )
+    }
+
+    renderRows() {
+        return this.state.list.map(user => {
+            return (
+                <tr key={user.id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                        <button className="btn btn-warning "
+                            onClick={() => this.load(user)}>
+                            <i className="fa fa-pencil"></i>
+                        </button>
+                        <button className="btn btn-danger ml-2"
+                            onClick={() => this.remove(user)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            )
+        })
     }
 
     renderForm() {
@@ -88,6 +140,7 @@ export default class UserCRUD extends Component {
         return (
             <Main {...headerProps}>
                 {this.renderForm()}
+                {this.renderTable()}
             </Main>
         )
     }
