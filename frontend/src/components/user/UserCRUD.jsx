@@ -38,6 +38,7 @@ export default class UserCRUD extends Component {
                 const list = this.getUpdatedList(resp.data)
                 this.setState({user: initialState.user, list})
             })
+        method === 'put' ? notify.show('Usuário alterado com sucesso!') : notify.show('Usuário adicionado com sucesso!')
     }
 
     updateField(e) {
@@ -60,7 +61,7 @@ export default class UserCRUD extends Component {
         axios.delete(`${baseUrl}/${user.id}`).then(resp => {
             const list = this.getUpdatedList(user, false)
             this.setState({list})
-            notify.show('Usuário deletado com sucesso!')
+            notify.show('Usuário removido com sucesso!')
         })
     }
 

@@ -14,7 +14,7 @@ import Notifications from 'react-notify-toast'
 export default props =>
     <BrowserRouter>
         <div className="app">
-            <Notifications timeout={5000} />
+            <Notifications timeout={5000}/>
             <Logo />
             <Nav />
             <Routes />

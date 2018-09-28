@@ -1,3 +1,9 @@
 {
-  "users": []
+  "users": [
+    {
+      "name": "Vinícios de Araújo Rodrigues",
+      "email": "viniciosarodrigues@gmail.com",
+      "id": 1
+    }
+  ]
 }
